@@ -63,29 +63,29 @@ for k = row_ptrs[i] to row_ptrs[i+1] - 1
 
 ## Alternatives
 Two other sparse formats which were considered
-1. **Coordinate Format (COO)**: Stores each non-zero value as a triple `(row, column, value)`. It is the simplest format to construct but less efficient for matrix-vector multiplications it requires sorting and does not support fast row slicing. It also used more memory since it stores a full row index for every non-zero element.
+- **Coordinate Format (COO)**: Stores each non-zero value as a triple `(row, column, value)`. It is the simplest format to construct but less efficient for matrix-vector multiplications it requires sorting and does not support fast row slicing. It also used more memory since it stores a full row index for every non-zero element.
 
-2. **Compressed Sparse Columns (CSC)**: The column major equivalent of CSR. It is well-suited for column-wise access patterns. However, since matrix-vector multiplication is primarily a row wise operation, CSC would require more complex indexing and lose the cache locality advantage provided naturally by CSR.
+- **Compressed Sparse Columns (CSC)**: The column major equivalent of CSR. It is well-suited for column-wise access patterns. However, since matrix-vector multiplication is primarily a row wise operation, CSC would require more complex indexing and lose the cache locality advantage provided naturally by CSR.
 
 ## Complexity
 - **Time Complexity**
-1. **Dense to CSR**: `O(MxN)` where `M` is number of rows and `N` is number of columns
-2. **Matrix-Vector Multiplication**: `O(M+NNZ)` where `M` is the number of rows and `NNZ` is the number of non-zero values
+**Dense to CSR**: `O(MxN)` where `M` is number of rows and `N` is number of columns
+**Matrix-Vector Multiplication**: `O(M+NNZ)` where `M` is the number of rows and `NNZ` is the number of non-zero values
 
 **Total Time Complexity**: `O(MxN)` as `NNZ` can never be larger than `M x N`, so the overall execution time is dominated by the Dense to CSR conversion.
 
 - **Space**
-1. **Auxillary space**: `O(1)` as only a few local variables are declared inside the function
-2. **Data structure space**: `O(NNZ+M)` because `values` and `col_indices` scales with `NNZ` and `row_ptrs` and `y` scales with `M`.
+**Auxillary space**: `O(1)` as only a few local variables are declared inside the function
+**Data structure space**: `O(NNZ+M)` because `values` and `col_indices` scales with `NNZ` and `row_ptrs` and `y` scales with `M`.
 
 **Total Space Complexity**: `O(1)` is the total space complexity as the caller is responsible for allocating memory passed to the function.
 ## Testing & Validation
 The main function inside `challenge.c` acts as a test harness, proving the mathematical accuracy and stability of the sparse_multiply function.
-1. **Iterations**: 100 independent test cycles
-2. **Randomized Values**: Generate a matrix between `5 x 5` and `45 x 45` and a random sparsity density (5% - 40%)
-3. **True Answer**:  Calculates a reference vector output using a standard dense matrix multiplication
-4. **Error Tolerance**:  To account for floating-point drift, it used mixed absolute and relative tolerance formula: `1e-7 + 1e-7 * fabs(y_ref[i])`
-5. **Exit Conditions**: The program logs the pass/fail status of every iteration and will only exit with a success code (0) if all 100 randomized matrices compute perfectly.
+- **Iterations**: 100 independent test cycles
+- **Randomized Values**: Generate a matrix between `5 x 5` and `45 x 45` and a random sparsity density (5% - 40%)
+- **True Answer**:  Calculates a reference vector output using a standard dense matrix multiplication
+- **Error Tolerance**:  To account for floating-point drift, it used mixed absolute and relative tolerance formula: `1e-7 + 1e-7 * fabs(y_ref[i])`
+- **Exit Conditions**: The program logs the pass/fail status of every iteration and will only exit with a success code (0) if all 100 randomized matrices compute perfectly.
 
 ## Results
 This code passes all the automated tests run inside the main function block
