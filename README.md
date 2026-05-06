@@ -69,16 +69,21 @@ Two other sparse formats which were considered
 
 ## Complexity
 - **Time Complexity**
+
 **Dense to CSR**: `O(MxN)` where `M` is number of rows and `N` is number of columns
+
 **Matrix-Vector Multiplication**: `O(M+NNZ)` where `M` is the number of rows and `NNZ` is the number of non-zero values
 
 **Total Time Complexity**: `O(MxN)` as `NNZ` can never be larger than `M x N`, so the overall execution time is dominated by the Dense to CSR conversion.
 
 - **Space**
+
 **Auxillary space**: `O(1)` as only a few local variables are declared inside the function
+
 **Data structure space**: `O(NNZ+M)` because `values` and `col_indices` scales with `NNZ` and `row_ptrs` and `y` scales with `M`.
 
 **Total Space Complexity**: `O(1)` is the total space complexity as the caller is responsible for allocating memory passed to the function.
+
 ## Testing & Validation
 The main function inside `challenge.c` acts as a test harness, proving the mathematical accuracy and stability of the sparse_multiply function.
 - **Iterations**: 100 independent test cycles
