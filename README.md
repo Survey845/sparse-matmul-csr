@@ -90,12 +90,12 @@ The main function inside `challenge.c` acts as a test harness, proving the mathe
 ## Results
 This code passes all the automated tests run inside the main function block
 
-- **Iteration**
+**Iteration**
 
 ```
 Iter  0 [ 19x 45, density=0.22, nnz= 199]: PASS (Max error: 0.00e+00)
 ```
-- **Final**
+**Final**
 
 ```
 All tests passed! (100/100 iterations passed)
@@ -138,7 +138,7 @@ sparse_multiply(rows, cols, A, x, &out_nnz, values, col_indices, row_ptrs, y);
 
 - **Scientific computing and simulation**: It is a core operation in iterative solvers like Conjugate Gradient and GMRES, used in large-scale physics simulation and computational fluid dynamics
 
-- **Lightweight sparse BLAS library**:u Part of a clean, portable and lightweight sparse linear algebra library for the RISC-V ecosystem, filling the gap between dense-optimized OpenBLAS libraries and equivalent sparse support for RVV enabled processors.
+- **Lightweight sparse BLAS library**: Part of a clean, portable and lightweight sparse linear algebra library for the RISC-V ecosystem, filling the gap between dense-optimized OpenBLAS libraries and equivalent sparse support for RVV enabled processors.
 
 ## Reading Material
 - [RISC-V Vector ISA](https://riscv.org/wp-content/uploads/2024/12/15.20-15.55-18.05.06.VEXT-bcn-v1.pdf)
